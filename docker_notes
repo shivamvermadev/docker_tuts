@@ -68,3 +68,9 @@ we can create container from an image
 start some base image and add dependencies to it, after that get the container id of the base image
 and then do - docker commit -c 'CMD ["redis-server"]' container_id - 
 'CMD ["redis-server"]' is the default command that will be issued when that created image starts up
+
+---
+docker run with port mapping
+docker run -p port1:port2 image_name // port1 - which is receiving request from browser or postman, port2 is the port inside container
+by default container can make outside network calls but cannot recieve incoming request for that we have to port mapping as per above syntax
+
