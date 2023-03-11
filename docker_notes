@@ -61,3 +61,10 @@ after dockerfile creation, build docker image using - docker build .
 creation of docker image uses cache
 if some part of command was already ran earlier, then docker wont download those dependencies again, it uses cache.
 
+tagging an image
+docker build -t shivamvermadev/redis:latest . // this will tag the image with - shivamvermadev/redis
+
+we can create container from an image
+start some base image and add dependencies to it, after that get the container id of the base image
+and then do - docker commit -c 'CMD ["redis-server"]' container_id - 
+'CMD ["redis-server"]' is the default command that will be issued when that created image starts up
