@@ -1,0 +1,63 @@
+docker run image_name   // it will check if the image is present locally on hard-drive and if not it will fetch the image from docker-hub and run it
+
+docker ps  // this will list all the running containers
+
+
+docker run image_name overriding_command   // if we don't provide overriding command then docker with run the default command associate with image and also that overriding command should be prensent inside that image otherwise it will throw error!
+
+docker ps --all // this will list all the container that had been run on a machine
+
+
+docker run = docker create + docker start
+
+docker create image_name // this will create a container from an image and will print the container id of new created container
+
+docker start -a container_id // this will start the container from above, -a will watch the output from container and print it to my terminal
+
+exited or stopped container can be restarted with docker start -a container_id or docker start container_id 
+
+docker system prune // this will remove all the stopped containers that are occupying disk space
+
+docker stop container_id // this will stop the container and it gives container 10sec to do all its clean up work like saving the file, if the container doesn't stop in 10 sec then docker will issue docker kill container_id internally and will kill the container
+
+docker kill container_id // this will kill the container instantly
+
+executing commands in running container - 
+docker exec -it container_id command_to_be_issued // exec -> execute, -it -> input to container
+ex: docker exec -it container_id bash // this will take us inside the running container 
+
+docker run redis
+ex: docker exec -it container_id redis-cli
+
+
+-it can also be written as -i -t // -i refers as input to container, -t formats the output from the container on to the terminal
+
+if we run - docker run -it image_name overriding_command // in this case the default command of image will be overriden with overriding_command so it is better to run - docker exec -it container_id after container is running and not when starting container
+
+containers run in an isolated environment, so if file created inside one container cannot be found inside another container
+
+--------------------
+creating docker image
+1- create docker file 
+2- use an existing image
+3- download and install dependency
+4- default command to be run when image is run as container
+
+ex 
+# Use an existing docker image as a base
+
+FROM alpine
+
+# Download and install a dependency
+
+RUN apk add --update redis
+
+# Tell the image what to do when it starts as as container
+
+CMD ["redis-server"]
+
+after dockerfile creation, build docker image using - docker build .
+
+creation of docker image uses cache
+if some part of command was already ran earlier, then docker wont download those dependencies again, it uses cache.
+
