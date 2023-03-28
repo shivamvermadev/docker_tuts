@@ -1,0 +1,10 @@
+version: '3' # version of yml file used
+services:
+  redis-server:
+    image: 'redis'
+  node-app:
+    build: .
+    ports:
+      - "4001:8081"
+
+#docker compose with create these two containers(redis-server and node-app) on the same network so that they can communicate with each other 
