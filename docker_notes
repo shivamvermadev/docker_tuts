@@ -2,6 +2,7 @@ docker run image_name   // it will check if the image is present locally on hard
 
 docker ps  // this will list all the running containers
 
+docker run -d image_name // will run the docker container in background and not logging its output on console. ex : docker run -d redis
 
 docker run image_name overriding_command   // if we don't provide overriding command then docker with run the default command associate with image and also that overriding command should be prensent inside that image otherwise it will throw error!
 
@@ -82,3 +83,7 @@ to run all containers listed in docker-compose.yml run command ->  docker-compos
 docker-compose up -> is equivalent to > docker run image_name
 
 docker build . and docker run image_name is equivalent to -> docker-compose up --build -> this will rebuild the image from the docker file that is present locally
+
+docker-compose up -d // will run the images listed in docker-compose.yml file in background and not print anything on the console 
+
+to stop the container running from docker-compose run -> docker-compose down
