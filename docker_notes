@@ -87,3 +87,7 @@ docker build . and docker run image_name is equivalent to -> docker-compose up -
 docker-compose up -d // will run the images listed in docker-compose.yml file in background and not print anything on the console 
 
 to stop the container running from docker-compose run -> docker-compose down
+
+restarting crashed container- mentioning restart policy in docker-compose.yml file
+there are 4 restart policies always, on-failure, unless-stopped, 'no' -> no will come in single quotes in docker-compose.yml file
+
