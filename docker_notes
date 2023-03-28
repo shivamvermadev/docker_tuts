@@ -73,4 +73,12 @@ and then do - docker commit -c 'CMD ["redis-server"]' container_id -
 docker run with port mapping
 docker run -p port1:port2 image_name // port1 - which is receiving request from browser or postman, port2 is the port inside container
 by default container can make outside network calls but cannot recieve incoming request for that we have to port mapping as per above syntax
+--------------------------------------
 
+docker-compose
+
+creating docker-compose.yml file will put containers listed in docker-compose file onto same network
+to run all containers listed in docker-compose.yml run command ->  docker-compose up
+docker-compose up -> is equivalent to > docker run image_name
+
+docker build . and docker run image_name is equivalent to -> docker-compose up --build -> this will rebuild the image from the docker file that is present locally
