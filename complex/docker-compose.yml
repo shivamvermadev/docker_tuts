@@ -1,0 +1,47 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres'
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
+  redis:
+    image: 'redis'
+  api:
+    build: 
+      dockerfile: Dockerfile.dev
+      context: ./server # context defines the working directory from where to pick the docker file
+    volumes:
+      - /app/node_modules #this means ignore this folder
+      - ./server:/app # this means everything inside server folder should be mapped to /app folder that we have created in docker file, take a look
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+  worker:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./worker
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3050:80'
