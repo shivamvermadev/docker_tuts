@@ -1,0 +1,37 @@
+--------------------------------------------------
+Kubernetes 
+If we want to run multiple types of images on same machine, K8s is the solution
+minikube is the tool that is used to setup kubernetes on the local machine
+minikube is going to create kubernetes cluster on your local machine, behind the scenes it creates virtual machines whose sole purpose is run some number of containers.
+kubectl is the program used for managing these containers
+
+https://www.vmware.com/topics/glossary/content/components-kubernetes.html#:~:text=Pods%20are%20simply%20the%20smallest,that%20comprise%20a%20Kubernetes%20Cluster.
+
+
+The config files that we create are in kubernetes are used to create Objects
+Objects serve different purpose like running containers, monitoring a container, setting up networking etc.
+https://drive.google.com/file/d/13vzv35vM3lRhCfAZCKw1ZzbIN4AJtpN4/view?usp=share_link
+
+Object like pods are used to run containers, Objects like service is used to setup networking
+
+when we ran minikube start, it created a virtual machine on our computer, we refer to that virtual machine running on my computer as a node, this node is going to be used by kubernetes to run some number of different objects
+The most basic object that we are going to create is a pod
+the pod is essentially a grouping of containers with a very common purpose, basically the multiple containers running inside the pod are tightly coupled with each other and have high dependency
+
+The smallest thing that we can deploy in kubernetes is a pod, so we are always going to be deploying containers within a pod
+
+https://drive.google.com/file/d/1o4v9fAuDmLAxw6rixEQefoasF66H-o_Y/view?usp=share_link
+
+There are 4 types of services -> ClusterIP, NodePort(Exposes container to the outside world, only good for dev purpose), LoadBalancer, Ingres.
+
+
+When we create a service of type NodePort, its gonna setup a communication layer between the outside world and container running inside the pod. 
+THere is also this thing called kube-proxy, every single node of kubernetes cluster have this program on it called kube-proxy
+Kube-proxy is essentially a one single window to the outside world, so at any time a requests comes into a node its going to flow to kube-proxy, this proxy is going to inspect this request and route it to different services 
+https://drive.google.com/file/d/1FJDKz9kQJ1z3SkdrCaYN8tEJo5jBhUNq/view?usp=share_link
+
+feeding config files to minikube -> kubectl apply -f filename.yml
+
+Print the status of all running pods -> kubectl get pods
+Print the status of all running services -> kubectl get services
+minikube ip -> will print out the IP address of that virtual machine
