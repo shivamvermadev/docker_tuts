@@ -114,6 +114,7 @@ StackOverFlow Question
 https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container?page=1&tab=trending#tab-top
 
 Docker Images vs. Containers
+Dockerfile → (Build) → Image → (Run) → Container.
 In Dockerland, there are images and there are containers. The two are closely related, but distinct.
 
 What's an Image?
